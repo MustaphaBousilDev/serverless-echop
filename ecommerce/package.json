@@ -1,0 +1,19 @@
+{
+  "name": "ecommerce-serverless",
+  "version": "1.0.0",
+  "description": "for application serverless ecommerce",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MustaphaBousilDev/serverless-echop.git"
+  },
+  "author": "mustapha bousil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MustaphaBousilDev/serverless-echop/issues"
+  },
+  "homepage": "https://github.com/MustaphaBousilDev/serverless-echop#readme"
+}
