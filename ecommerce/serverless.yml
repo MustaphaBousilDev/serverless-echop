@@ -20,6 +20,18 @@ functions:
       - http:
           method: put
           path: products/{id}
+  deleteProduct:
+    handler: handler.deleteProduct
+    events:
+      - http:
+          method: delete
+          path: products/{id}
+  getAllProducts:
+    handler: handler.getAllProducts
+    events:
+      - http:
+          method: get
+          path: products
 
 # you can add CloudFormation resource templates here
 #resources:
