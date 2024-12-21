@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/MustaphaBousilDev/serverless-echop/issues"
   },
-  "homepage": "https://github.com/MustaphaBousilDev/serverless-echop#readme"
+  "homepage": "https://github.com/MustaphaBousilDev/serverless-echop#readme",
+  "dependencies": {
+    "aws-sdk": "^2.1692.0"
+  },
+  "devDependencies": {
+    "serverless-iam-roles-per-function": "^3.2.0"
+  }
 }

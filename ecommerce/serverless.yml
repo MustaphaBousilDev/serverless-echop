@@ -1,4 +1,4 @@
-service: ecommerce-serverless-api
+service: ecommerce-serverless-app-new
 frameworkVersion: '2'
 provider:
   name: aws
@@ -8,43 +8,80 @@ provider:
   region: us-east-1
 
 functions:
+  #this is lambda functions that responsible of execution a piece of code
   createProduct:
     handler: handler.createProduct
+    iamRoleStatements:
+      - Effect: Allow 
+        Action: 
+          - dynamodb:PutItem
+        Resource: 
+          - !GetAtt productsTable.Arn
     events:
+      #http event
       - http:
           method: post
           path: products
   updateProduct:
     handler: handler.updateProduct
+    environment:
+      PRODUCTS_TABLE_NAME: !Ref  productsTable
+      AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+    iamRoleStatements:
+      - Effect: Allow 
+        Action: 
+          - dynamodb:UpdateItem
+        Resource: 
+          - !GetAtt productsTable.Arn
     events:
       - http:
-          method: put
-          path: products/{id}
+          method: put 
+          path: product/{id}
   deleteProduct:
     handler: handler.deleteProduct
+    environment:
+      PRODUCTS_TABLE_NAME: !Ref  productsTable
+      AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1 # for using the same HTTP connection to multiple request for optimizing performance  and rpevent re-creating TCP connection for each request 
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:DeleteItem
+        Resource: 
+          - !GetAtt productsTable.Arn
     events:
       - http:
-          method: delete
-          path: products/{id}
-  getAllProducts:
+          method: delete 
+          path: product/{id}
+  getAllProduct:
     handler: handler.getAllProducts
+    environment:
+      PRODUCTS_TABLE_NAME: !Ref  productsTable
+      AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:Scan
+        Resource: !GetAtt productsTable.Arn
     events:
       - http:
-          method: get
-          path: products 
+          method: get 
+          path: product
 
-# you can add CloudFormation resource templates here
+plugins:
+  - serverless-iam-roles-per-function
+
+#CloudFormation Resource templates 
+#-->congif for creating databasa in dynamoDB
 resources:
   Resources:
     productsTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: products 
+        TableName: products
         BillingMode: PAY_PER_REQUEST
         AttributeDefinitions:
-          - AttributeName: productId
-            AttributeType: S #is for string type
+          - AttributeName: productsId
+            AttributeType: S
         KeySchema:
-          - AttributeName: productId
+          - AttributeName: productsId
             KeyType: HASH
-
