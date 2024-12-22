@@ -17,9 +17,12 @@
   },
   "homepage": "https://github.com/MustaphaBousilDev/serverless-echop#readme",
   "dependencies": {
-    "aws-sdk": "^2.1692.0"
+    "aws-sdk": "^2.1692.0",
+    "serverless-offline": "^14.4.0"
   },
   "devDependencies": {
+    "eslint": "^9.17.0",
+    "prettier": "^3.4.2",
     "serverless-iam-roles-per-function": "^3.2.0"
   }
 }
