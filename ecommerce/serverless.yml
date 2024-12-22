@@ -11,6 +11,8 @@ functions:
   #this is lambda functions that responsible of execution a piece of code
   createProduct:
     handler: src/handlers/products/createProduct.createProduct
+    environment:
+      AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1 # for using the same HTTP connection to multiple request for optimizing performance  and rpevent re-creating TCP connection for each request
     iamRoleStatements:
       - Effect: Allow 
         Action: 
