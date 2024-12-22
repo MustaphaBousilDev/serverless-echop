@@ -4,12 +4,12 @@ module.exports.createProductService = async ({ title, price, description, imgKey
   return await ProductModel.create({ title, price, description, imgKey, productsId });
 };
 
-module.exports.updateProductService = async (productId, { title, price, description, imgKey }) => {
-  return await ProductModel.update(productId, { title, price, description, imgKey });
+module.exports.updateProductService = async (productsId, { title, price, description, imgKey }) => {
+  return await ProductModel.update(productsId, { title, price, description, imgKey });
 };
 
-module.exports.deleteProductService = async (productId) => {
-  return await ProductModel.delete(productId);
+module.exports.deleteProductService = async (productsId) => {
+  return await ProductModel.delete(productsId);
 };
 
 module.exports.getAllProductService = async () => {

@@ -28,10 +28,10 @@ module.exports.ProductModel = {
     }
   },
 
-  update: async (productId, { title, price, description, imgKey }) => {
+  update: async (productsId, { title, price, description, imgKey }) => {
     const params = {
-      TableName: PRODUCTS_TABLE_NAME,
-      Key: { productId },
+      TableName: 'products',
+      Key: { productsId },
       UpdateExpression: 'SET title = :title, price = :price, description = :description, imgKey = :imgKey',
       ExpressionAttributeValues: {
         ':title': title,
@@ -50,10 +50,10 @@ module.exports.ProductModel = {
     }
   },
 
-  delete: async (productId) => {
+  delete: async (productsId) => {
     const params = {
-      TableName: PRODUCTS_TABLE_NAME,
-      Key: { productId }
+      TableName: 'products',
+      Key: { productsId }
     };
 
     try {
