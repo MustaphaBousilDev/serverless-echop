@@ -5,6 +5,10 @@ const AWS = require('aws-sdk');
 // You can set region or other configurations here, or get from environment variables
 AWS.config.update({
   region: process.env.AWS_REGION || 'us-east-1',
+  maxRetries: 3,
+  httpOptions: {
+    timeout: 5000,
+  },
 });
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
