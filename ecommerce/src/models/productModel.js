@@ -65,7 +65,7 @@ module.exports.ProductModel = {
 
   getAll: async () => {
     const params = {
-      TableName: PRODUCTS_TABLE_NAME
+      TableName: 'products'
     };
 
     try {

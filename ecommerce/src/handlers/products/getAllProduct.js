@@ -1,10 +1,10 @@
 // src/handlers/product/getAllProduct.js
 
-const { getAllProductsService } = require('../../services/productService');
+const { getAllProductService } = require('../../services/productService');
 
 module.exports.getAllProduct = async () => {
   try {
-    const products = await getAllProductsService();
+    const products = await getAllProductService();
 
     return {
       statusCode: 200,
