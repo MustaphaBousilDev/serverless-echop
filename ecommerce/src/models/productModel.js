@@ -4,18 +4,18 @@ const dynamodb = new AWS.DynamoDB.DocumentClient();
 const PRODUCTS_TABLE_NAME = process.env.PRODUCTS_TABLE_NAME;
 
 module.exports.ProductModel = {
-  create: async ({ title, price, description, imgKey, userId }) => {
+  create: async ({ title, price, description, imgKey, productsId }) => {
     const productId = new Date().toISOString(); // unique ID based on timestamp
 
     const params = {
-      TableName: PRODUCTS_TABLE_NAME,
+      TableName: 'products',
       Item: {
-        productId,
+        productsId,
         title,
         price,
         description,
         imgKey,
-        userId, // Relating the product to a user
+        userId: "100", // Relating the product to a user
         createdAt: new Date().toISOString()
       }
     };

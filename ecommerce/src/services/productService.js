@@ -1,7 +1,7 @@
 const { ProductModel } = require('../models/productModel'); // Adjusted path for model import
 
-module.exports.createProductService = async ({ title, price, description, imgKey, userId }) => {
-  return await ProductModel.create({ title, price, description, imgKey, userId });
+module.exports.createProductService = async ({ title, price, description, imgKey, productsId }) => {
+  return await ProductModel.create({ title, price, description, imgKey, productsId });
 };
 
 module.exports.updateProductService = async (productId, { title, price, description, imgKey }) => {

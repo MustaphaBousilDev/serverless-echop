@@ -5,7 +5,7 @@ const { validateProductData } = require('../../utils/validation');
 const { productCreatedEvent } = require('../../events/productEvent');
 
 module.exports.createProduct = async (event) => {
-  const { title, price, description, imgKey, userId } = JSON.parse(event.body);
+  const { title, price, description, imgKey, productsId } = JSON.parse(event.body);
 
   // Validate product data
   const validationErrors = validateProductData({ title, price, description, imgKey });
@@ -17,7 +17,13 @@ module.exports.createProduct = async (event) => {
   }
 
   try {
-    const product = await createProductService({ title, price, description, imgKey, userId });
+    const product = await createProductService({
+      title,
+      price,
+      description,
+      imgKey,
+      productsId
+    });
 
     // After the product is created, trigger an event
     const productEvent = productCreatedEvent(product);

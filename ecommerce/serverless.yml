@@ -24,7 +24,7 @@ functions:
           method: post
           path: products
   updateProduct:
-    handler: src/product/handler.updateProduct
+    handler: src/handlers/products/updateProduct.updateProduct
     environment:
       PRODUCTS_TABLE_NAME: !Ref  productsTable
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
@@ -40,7 +40,7 @@ functions:
           method: put 
           path: product/{id}
   deleteProduct:
-    handler: src/product/handler.deleteProduct
+    handler: src/handlers/products/deleteProduct.deleteProduct
     environment:
       PRODUCTS_TABLE_NAME: !Ref  productsTable
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1 # for using the same HTTP connection to multiple request for optimizing performance  and rpevent re-creating TCP connection for each request 
@@ -56,7 +56,7 @@ functions:
           method: delete 
           path: product/{id}
   getAllProduct:
-    handler: src/product/handler.getAllProducts
+    handler: src/handlers/products/getAllProduct.getAllProduct
     environment:
       PRODUCTS_TABLE_NAME: !Ref  productsTable
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
@@ -99,9 +99,6 @@ resources:
                 KeyType: HASH
             Projection:
               ProjectionType: ALL
-            ProvisionedThroughput:
-              ReadCapacityUnits: 5
-              WriteCapacityUnits: 5
     usersTable:
       Type: AWS::DynamoDB::Table
       Properties:
