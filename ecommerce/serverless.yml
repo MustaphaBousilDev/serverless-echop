@@ -8,6 +8,9 @@ provider:
   region: us-east-1
 
 functions:
+  #authorizer function
+  authorizerCustom:
+    handler: src/handlers/auth/authorizer.authorizer
   #this is lambda functions that responsible of execution a piece of code
   createProduct:
     handler: src/handlers/products/createProduct.createProduct
@@ -25,6 +28,7 @@ functions:
       - http:
           method: post
           path: products
+          authorizer: authorizerCustom
   updateProduct:
     handler: src/handlers/products/updateProduct.updateProduct
     environment:
@@ -41,6 +45,7 @@ functions:
       - http:
           method: put 
           path: product/{id}
+          authorizer: authorizerCustom
   deleteProduct:
     handler: src/handlers/products/deleteProduct.deleteProduct
     environment:
@@ -57,6 +62,7 @@ functions:
       - http:
           method: delete 
           path: product/{id}
+          authorizer: authorizerCustom
   getAllProduct:
     handler: src/handlers/products/getAllProduct.getAllProduct
     environment:
@@ -73,6 +79,7 @@ functions:
       - http:
           method: get 
           path: product
+          authorizer: authorizerCustom
 
 plugins:
   - serverless-iam-roles-per-function
