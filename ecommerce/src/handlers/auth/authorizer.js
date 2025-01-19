@@ -1,4 +1,6 @@
 const generatePolicy = (principalId, effect, resource) => {
+    
+
     const authResponse = {};
     authResponse.principalId = principalId;
     if (effect && resource) {
@@ -11,12 +13,16 @@ const generatePolicy = (principalId, effect, resource) => {
         statementOne.Resource = resource;
         policyDocument.Statement[0] = statementOne;
         authResponse.policyDocument = policyDocument;
-    }
-    return authResponse;
+        authResponse.context = {
+            foo: 'bar' // you can add extra key-value pairs here in other words you can add extra data to the policy
+        };
+     }
+     console.log(JSON.stringify(authResponse));
+     return authResponse;
 }
 
 module.exports.authorizer = async (event) => {
-    let token = event.authorizationToken;
+    let token = event.authorizationToken; // "allow" or "deny"
     switch(token) {
         case 'allow':
             return generatePolicy('user', 'Allow', event.methodArn);
